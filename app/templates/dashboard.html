@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  <!--my css-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .btn-custom {
+            background-color: #000;
+            color: #fff;
+        }
+        .btn-custom:hover {
+            background-color: #000;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh;
+            width: 80vw;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">User Age and Gender Distribution</h2>
+    <div class="chart-container">
+        <canvas id="ageGenderChart"></canvas>
+    </div>
+    <h2 class="mb-4 mt-5">Upload Trends</h2>
+    <div class="chart-container">
+        <canvas id="uploadTrendsChart"></canvas>
+    </div>
+    <h2 class="mb-4 mt-5">Gender Ratio</h2>
+    <div class="chart-container">
+        <canvas id="genderRatioChart"></canvas>
+    </div>
+    <a href="{{ url_for('home') }}" class="btn btn-primary mt-4"><i class="fas fa-home"></i> Back to Home</a>
+</div>
+
+<script>
+    var ctx = document.getElementById('ageGenderChart').getContext('2d');
+    var ageGenderData = {{ age_gender_data|safe }};
+    
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ageGenderData.labels,
+            datasets: [
+                {
+                    label: 'Male',
+                    data: ageGenderData.male,
+                    backgroundColor: 'blue',  
+                    borderColor: 'blue',  
+                    borderWidth: 1
+                },
+                {
+                    label: 'Female',
+                    data: ageGenderData.female,
+                    backgroundColor: 'purple',  
+                    borderColor: 'purple',  
+                    borderWidth: 1
+                },
+                {
+                    label: 'Other',
+                    data: ageGenderData.other,
+                    backgroundColor: 'teal',  
+                    borderColor: 'teal',  
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Age Groups'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Number of Users'
+                    },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'User Distribution by Age and Gender'
+                }
+            }
+        }
+    });
+
+    // Trends Chart
+    var uploadTrendsCtx = document.getElementById('uploadTrendsChart').getContext('2d');
+    var uploadTrendsData = {{ upload_trends|safe }};
+
+    new Chart(uploadTrendsCtx, {
+        type: 'line',
+        data: {
+            labels: Object.keys(uploadTrendsData),
+            datasets: [{
+                label: 'Number of Uploads',
+                data: Object.values(uploadTrendsData),
+                backgroundColor: 'orange',  
+                borderColor: 'orange',  
+                borderWidth: 2,
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Number of Uploads'
+                    },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Number of Uploads Over Time'
+                }
+            }
+        }
+    });
+
+    // Gender Ratio Chart
+    var genderRatioCtx = document.getElementById('genderRatioChart').getContext('2d');
+    var genderCountsData = {{ gender_counts|safe }};
+
+    new Chart(genderRatioCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Male', 'Female', 'Other'],
+            datasets: [{
+                data: [genderCountsData.male, genderCountsData.female, genderCountsData.other],
+                backgroundColor: ['blue', 'purple', 'teal'],  
+                borderColor: ['blue', 'purple', 'teal'],  
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Gender Ratio'
+                }
+            }
+        }
+    });
+    
+</script>
+
+
+</body>
+</html>

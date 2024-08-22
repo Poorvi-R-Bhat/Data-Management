@@ -1,0 +1,5 @@
+Row 1: 'Sno' must be a unique string.
+Row 1: 'FirstName' must be a string with length between 1 and 50.
+Row 1: 'LastName' must be a string with length between 1 and 50.
+Row 1: 'Gender' must be 'M', 'F', or 'O'.
+Row 1: 'DateofBirth' must be in YYYY-MM-DD format.
