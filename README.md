@@ -12,6 +12,7 @@ The Data Management System is a  web application that allows users to upload Exc
 - View uploaded data and manage records.
 - Dashboard with visualizations showing the number of users based on age and gender.
 
+
 ## 🛠 Setup and Installation
 
 ### Prerequisites:
@@ -28,6 +29,10 @@ The Data Management System is a  web application that allows users to upload Exc
 ```
 
 ### Usage Instructions
+
+
+https://github.com/user-attachments/assets/9ee67571-dda7-4c65-8b74-56cf84a1ecb9
+
 Uploading Files:
 Navigate to the Upload page.
 Upload a .xlsx file with the required structure.
