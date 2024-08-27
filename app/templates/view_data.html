@@ -57,6 +57,7 @@
 <div class="container">
     <h2>Uploaded Data</h2>
 
+    <!-- Viewing the data as same in excel format-->
     <table class="table table-bordered table-hover">
         <thead class="thead-light">
             <tr>
@@ -68,7 +69,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for user in user_data %}
+            {% for user in user_data %} 
             <tr>
                 <td>{{ user.sno }}</td>
                 <td>{{ user.first_name }}</td>

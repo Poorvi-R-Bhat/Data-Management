@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Management System</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!--for the icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!--for the Poppins font-->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            margin: 0;      /*removes any default spacing */
+            padding: 0;     /*removes any default spacing */
+            height: 100vh;   /*To set the full page bg image */
             background-image: url('{{ url_for('static', filename='images/Background.png') }}');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: no-repeat; /*bg image should appear once */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
         .hero-text {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -53,7 +53,7 @@
             justify-content: center;
         }
         .btn-custom i {
-            margin-right: 10px;
+            margin-right: 10px; /*10px margin to the right of the icon of i class */
         }
         .btn-custom:hover {
             background-color: #c5a323;
@@ -67,6 +67,7 @@
     <h1>Data Management System</h1>
 </div>
 
+<!--Providing only 3 buttons in the home page-->
 <div class="container">
     <a href="{{ url_for('upload_file') }}" class="btn btn-custom"><i class="fas fa-upload"></i> Upload File</a>
     <a href="{{ url_for('view_uploaded_data') }}" class="btn btn-custom"><i class="fas fa-database"></i> View Uploaded Data</a>

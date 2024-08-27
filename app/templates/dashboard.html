@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   <!-- Content scaling-->
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  <!--my css-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>     <!-- for the charts-->
     <style>
         .btn-custom {
             background-color: #000;
@@ -42,10 +41,10 @@
 </div>
 
 <script>
-    var ctx = document.getElementById('ageGenderChart').getContext('2d');
+    var a = document.getElementById('ageGenderChart').getContext('2d');
     var ageGenderData = {{ age_gender_data|safe }};
     
-    var chart = new Chart(ctx, {
+    var chart = new Chart(a, {
         type: 'bar',
         data: {
             labels: ageGenderData.labels,
@@ -78,18 +77,18 @@
                 x: {
                     title: {
                         display: true,
-                        text: 'Age Groups'
+                        text: 'Age Groups'     //x axis title
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Number of Users'
+                        text: 'Number of Users'   //y axis
                     },
                     beginAtZero: true
                 }
             },
-            plugins: {
+            plugins: {                              // customize display of charts
                 title: {
                     display: true,
                     text: 'User Distribution by Age and Gender'
@@ -99,21 +98,21 @@
     });
 
     // Trends Chart
-    var uploadTrendsCtx = document.getElementById('uploadTrendsChart').getContext('2d');
-    var uploadTrendsData = {{ upload_trends|safe }};
+    var uploadTrendsa = document.getElementById('uploadTrendsChart').getContext('2d');
+    var uploadTrendsData = {{ upload_trends|safe }};   // insert raw json directly into js
 
-    new Chart(uploadTrendsCtx, {
+    new Chart(uploadTrendsa, {
         type: 'line',
         data: {
-            labels: Object.keys(uploadTrendsData),
+            labels: Object.keys(uploadTrendsData),    //date
             datasets: [{
                 label: 'Number of Uploads',
-                data: Object.values(uploadTrendsData),
+                data: Object.values(uploadTrendsData),  //number of uploads
                 backgroundColor: 'orange',  
                 borderColor: 'orange',  
                 borderWidth: 2,
-                fill: false,
-                tension: 0.1
+                fill: false,  // no filling for the line
+                tension: 0.1  //slightly curved line
             }]
         },
         options: {
@@ -142,17 +141,17 @@
     });
 
     // Gender Ratio Chart
-    var genderRatioCtx = document.getElementById('genderRatioChart').getContext('2d');
+    var genderRatioa = document.getElementById('genderRatioChart').getContext('2d');
     var genderCountsData = {{ gender_counts|safe }};
 
-    new Chart(genderRatioCtx, {
+    new Chart(genderRatioa, {
         type: 'pie',
         data: {
             labels: ['Male', 'Female', 'Other'],
             datasets: [{
                 data: [genderCountsData.male, genderCountsData.female, genderCountsData.other],
-                backgroundColor: ['blue', 'purple', 'teal'],  
-                borderColor: ['blue', 'purple', 'teal'],  
+                backgroundColor: ['blue', 'purple', 'teal'],     //M,F,O
+                borderColor: ['blue', 'purple', 'teal'],          //M,F,O
                 borderWidth: 1
             }]
         },

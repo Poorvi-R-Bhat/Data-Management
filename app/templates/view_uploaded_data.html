@@ -26,7 +26,7 @@
             margin-bottom: 20px;
         }
         .upload-list {
-            list-style-type: none;
+            list-style-type: none; /* Remove default bullet points */
             padding: 0;
         }
         .upload-list li {
@@ -37,11 +37,11 @@
             color: #000;
         }
         .upload-list li a {
-            text-decoration: none;
-            color: #000;
+            text-decoration: none;  /* Remove underline from links */
+            color: #000;          /* Set text color for links */
         }
         .upload-list li a:hover {
-            text-decoration: underline;
+            text-decoration: underline;   /* Underline links on hover */
         }
         .upload-list li a:hover {
             text-decoration: underline;
@@ -61,10 +61,10 @@
     <h2>Uploaded Data</h2>
 
     <ul class="upload-list">
-        {% for upload in uploads %}
+        {% for upload in uploads %}   <!-- upload is single object and uploads is upload_timestamp in desc-->
         <li>
             <strong>{{ upload.upload_id }}</strong> - Uploaded on {{ upload.upload_timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
-            <a href="{{ url_for('view_data', upload_id=upload.upload_id) }}">View Data</a>
+            <a href="{{ url_for('view_data', upload_id=upload.upload_id) }}">View Data</a> <!--URL generated would be something like /view_data/DUP0001-->
         </li>
         {% endfor %}
     </ul>
